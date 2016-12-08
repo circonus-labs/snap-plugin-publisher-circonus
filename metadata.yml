@@ -1,0 +1,5 @@
+name: circonus
+type: publisher
+maintainer: circonus-labs
+license: file://LICENSE
+description: "Publishes metrics to Circonus."

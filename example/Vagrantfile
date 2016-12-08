@@ -1,0 +1,122 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+api_key = (ENV['CIRCONUS_API_TOKEN'] || '').strip
+if api_key.empty?
+    printf(
+        "\nERROR: Environment variable '%s' needs to be set.\n\n",
+        'CIRCONUS_API_TOKEN'
+    )
+    exit(1)
+end
+
+Vagrant.configure('2') do |config|
+    config.vm.box = 'maier/centos-7.2.1511-x86_64'
+
+    config.vm.define 'circonus-snap'
+
+    config.vm.provider 'virtualbox' do |vb|
+        vb.memory = '2048'
+        vb.cpus = '2'
+    end
+
+    config.vm.provision 'shell', inline: <<-SHELL
+        echo "Updating yum cache"
+        yum -q -e 0 makecache fast
+
+        echo "Updating OS"
+        yum -q update -y
+
+        echo "Installing git"
+        yum -q install -y git
+
+        if [[ ! -f /etc/yum.repos.d/intelsdi-x_snap.repo ]]; then
+            echo "Installing Intel Snap Telemetry Framework repository"
+            curl -sSL https://packagecloud.io/install/repositories/intelsdi-x/snap/script.rpm.sh | bash -s
+        fi
+        if [[ ! -x /usr/local/bin/snaptel ]]; then
+            echo "Installing Intel Snap Telementry Framework"
+            yum -q install -y snap-telemetry
+        fi
+        if [[ ! -f /usr/lib/systemd/system/snap-telemetry.service ]]; then
+            echo "Enabling Intel Snap Telementry Framework"
+            systemctl enable snap-telemetry
+        fi
+
+        echo 'export PATH="${PATH}:/opt/snap/bin"' > /etc/profile.d/snap.sh
+        # stop it for the following build and install steps, restart afterwards
+        systemctl stop snap-telemetry
+
+        go_ver="1.7.4"
+        go_tgz="go${go_ver}.linux-amd64.tar.gz"
+        if [[ ! -x /usr/local/go/bin/go ]]; then
+            [[ -f "/vagrant/${go_tgz}" ]] || {
+                go_url="https://storage.googleapis.com/golang/${go_tgz}"
+                echo "Downloading go (from: ${go_url})"
+                curl -sSL "$go_url" -o "/vagrant/${go_tgz}"
+            }
+            echo "Installing go (into /usr/local/go) from ${go_tgz}"
+            tar -zxf "/vagrant/${go_tgz}" -C /usr/local
+        fi
+
+        [[ -d /opt/circonus/godev ]] || mkdir -p /opt/circonus/godev
+        echo 'export GOROOT="/usr/local/go"' > /etc/profile.d/golang.sh
+        echo 'export GOPATH="/opt/circonus/godev"' >> /etc/profile.d/golang.sh
+        echo 'export PATH="${PATH}:${GOROOT}/bin:${GOPATH}/bin"' >> /etc/profile.d/golang.sh
+
+        echo "Installing snap collector plugins"
+        cd /opt/snap/plugins
+        snap_plugin_list="cpu df disk interface load meminfo"
+        for snap_plugin in $snap_plugin_list; do
+            plugin_file="snap-plugin-collector-${snap_plugin}"
+            plugin_url="https://s3-us-west-2.amazonaws.com/snap.ci.snap-telemetry.io/plugins/${plugin_file}/latest/linux/x86_64/${plugin_file}"
+            [[ -f $plugin_file ]] || {
+                echo "Installing snap $snap_plugin collector plugin ($plugin_url)"
+                curl -sSLO $plugin_url
+            }
+        done
+
+        plugin_name="snap-plugin-publisher-circonus"
+        repo_url="https://github.com/maier/${plugin_name}"
+        src_dir="/opt/circonus/godev/src/github.com/circonus-labs"
+        echo "Building ${plugin_name}"
+        source /etc/profile.d/golang.sh
+        [[ -d $src_dir ]] || mkdir -p $src_dir
+        cd $src_dir
+        echo "Checking ${plugin_name} repository"
+        if [[ -d $plugin_name/.git ]]; then
+            pushd $plugin_name
+            echo "Updating $repo_url"
+            git pull $repo_url 2>/dev/null
+            popd
+            [[ $? -ne 0 ]] && rm -rf $plugin_name
+        fi
+        if [[ ! -d $plugin_name/.git ]]; then
+            echo "Cloning $repo_url"
+            git clone $repo_url
+        fi
+        [[ -x "${GOPATH}/bin/govendor" ]] || {
+            echo "Fetching 'govendor'"
+            go get -u github.com/kardianos/govendor
+        }
+        cd $plugin_name
+        echo "Syncing vendor dependencies"
+        $GOPATH/bin/govendor sync
+        echo "Making ${plugin_name}"
+        make
+        echo "Installing $plugin_name"
+        cp -v "build/rootfs/${plugin_name}" /opt/snap/plugins
+
+        # install and load tasks
+        chmod 755 /opt/snap/plugins/snap-plugin*
+        sed -e 's/API_TOKEN/#{api_key}/' /vagrant/tasks/tasks-histogram.json > /opt/snap/plugins/tasks-histogram.json
+        sed -e 's/API_TOKEN/#{api_key}/' /vagrant/tasks/tasks-numeric.json > /opt/snap/plugins/tasks-numeric.json
+        echo "Restarting snap-telemetry service"
+        systemctl start snap-telemetry
+        echo "Waiting for snapteld to start" && for i in {1..4}; do echo "....."; sleep 5; done
+        echo "Loaded plugins"
+        /opt/snap/bin/snaptel plugin list
+        echo "Loaded tasks"
+        /opt/snap/bin/snaptel task list
+    SHELL
+end

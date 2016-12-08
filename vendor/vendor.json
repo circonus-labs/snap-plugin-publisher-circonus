@@ -1,0 +1,181 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "h5Q1o+kA7VMAR5QpBzVJZbBEgC0=",
+			"path": "github.com/Sirupsen/logrus",
+			"revision": "881bee4e20a5d11a6a88a5667c6f292072ac1963",
+			"revisionTime": "2016-12-02T02:35:07Z"
+		},
+		{
+			"checksumSHA1": "NHpMH2d7yGugQfoiHS1JmxEMRnM=",
+			"path": "github.com/circonus-labs/circonus-gometrics",
+			"revision": "4d93a8f79cb1e34a38f99dd13e64e8bfd3df1c72",
+			"revisionTime": "2016-12-08T20:29:48Z"
+		},
+		{
+			"checksumSHA1": "MYiRkXj0+X2ZESxBw1YRwFLVnLg=",
+			"path": "github.com/circonus-labs/circonus-gometrics/api",
+			"revision": "4d93a8f79cb1e34a38f99dd13e64e8bfd3df1c72",
+			"revisionTime": "2016-12-08T20:29:48Z"
+		},
+		{
+			"checksumSHA1": "Q8vBal/WrOceXZDL9NIJ6lSQAbs=",
+			"path": "github.com/circonus-labs/circonus-gometrics/checkmgr",
+			"revision": "4d93a8f79cb1e34a38f99dd13e64e8bfd3df1c72",
+			"revisionTime": "2016-12-08T20:29:48Z"
+		},
+		{
+			"checksumSHA1": "VbfeVqeOM+dTNxCmpvmYS0LwQn0=",
+			"path": "github.com/circonus-labs/circonusllhist",
+			"revision": "7d649b46cdc2cd2ed102d350688a75a4fd7778c6",
+			"revisionTime": "2016-11-21T13:51:53Z"
+		},
+		{
+			"checksumSHA1": "kBeNcaKk56FguvPSUCEaH6AxpRc=",
+			"path": "github.com/golang/protobuf/proto",
+			"revision": "8ee79997227bf9b34611aee7946ae64735e6fd93",
+			"revisionTime": "2016-11-17T03:31:26Z"
+		},
+		{
+			"checksumSHA1": "P3zGmsNjW8m15a+nks4FdVpFKwE=",
+			"path": "github.com/gopherjs/gopherjs/js",
+			"revision": "e34a5cd6a1bc7c4fde759f2d3039852fc68b5fcc",
+			"revisionTime": "2016-10-31T10:43:57Z"
+		},
+		{
+			"checksumSHA1": "Uzyon2091lmwacNsl1hCytjhHtg=",
+			"path": "github.com/hashicorp/go-cleanhttp",
+			"revision": "ad28ea4487f05916463e2423a55166280e8254b5",
+			"revisionTime": "2016-04-07T17:41:26Z"
+		},
+		{
+			"checksumSHA1": "ErJHGU6AVPZM9yoY/xV11TwSjQs=",
+			"path": "github.com/hashicorp/go-retryablehttp",
+			"revision": "6e85be8fee1dcaa02c0eaaac2df5a8fbecf94145",
+			"revisionTime": "2016-09-30T03:51:02Z"
+		},
+		{
+			"checksumSHA1": "qksnS2YyjPUER0NOujaebuRoQ6s=",
+			"path": "github.com/intelsdi-x/snap-plugin-lib-go/v1/plugin",
+			"revision": "4b5999a62ffb7604f173c1ab3c2205ba8b559624",
+			"revisionTime": "2016-11-16T23:37:49Z"
+		},
+		{
+			"checksumSHA1": "9ScEENec07VoVbxy17QZLB0vRZ0=",
+			"path": "github.com/intelsdi-x/snap-plugin-lib-go/v1/plugin/rpc",
+			"revision": "4b5999a62ffb7604f173c1ab3c2205ba8b559624",
+			"revisionTime": "2016-11-16T23:37:49Z"
+		},
+		{
+			"checksumSHA1": "Y3U6on66N0BszKXYvb2Q+qpG6f4=",
+			"path": "github.com/julienschmidt/httprouter",
+			"revision": "5dd70ee059943e81987a817fa1a755b11dd119c1",
+			"revisionTime": "2016-12-03T08:33:52Z"
+		},
+		{
+			"checksumSHA1": "9jjO5GjLa0XF/nfWihF02RoH4qc=",
+			"path": "golang.org/x/net/context",
+			"revision": "76a335320337265fe9b8e9cb84ef9de18016648d",
+			"revisionTime": "2016-12-06T11:33:42Z"
+		},
+		{
+			"checksumSHA1": "ydijX5KGTum3FoyPXzKJFeubMbE=",
+			"path": "golang.org/x/net/http2",
+			"revision": "76a335320337265fe9b8e9cb84ef9de18016648d",
+			"revisionTime": "2016-12-06T11:33:42Z"
+		},
+		{
+			"checksumSHA1": "HzuGD7AwgC0p1az1WAQnEFnEk98=",
+			"path": "golang.org/x/net/http2/hpack",
+			"revision": "76a335320337265fe9b8e9cb84ef9de18016648d",
+			"revisionTime": "2016-12-06T11:33:42Z"
+		},
+		{
+			"checksumSHA1": "GIGmSrYACByf5JDIP9ByBZksY80=",
+			"path": "golang.org/x/net/idna",
+			"revision": "76a335320337265fe9b8e9cb84ef9de18016648d",
+			"revisionTime": "2016-12-06T11:33:42Z"
+		},
+		{
+			"checksumSHA1": "/k7k6eJDkxXx6K9Zpo/OwNm58XM=",
+			"path": "golang.org/x/net/internal/timeseries",
+			"revision": "76a335320337265fe9b8e9cb84ef9de18016648d",
+			"revisionTime": "2016-12-06T11:33:42Z"
+		},
+		{
+			"checksumSHA1": "3xyuaSNmClqG4YWC7g0isQIbUTc=",
+			"path": "golang.org/x/net/lex/httplex",
+			"revision": "76a335320337265fe9b8e9cb84ef9de18016648d",
+			"revisionTime": "2016-12-06T11:33:42Z"
+		},
+		{
+			"checksumSHA1": "P9qTIn8a6L6Q9wd1IJBCuhno1Q8=",
+			"path": "golang.org/x/net/trace",
+			"revision": "76a335320337265fe9b8e9cb84ef9de18016648d",
+			"revisionTime": "2016-12-06T11:33:42Z"
+		},
+		{
+			"checksumSHA1": "8SH0adTcQlA+W5dzqiQ3Hft2VXg=",
+			"path": "golang.org/x/sys/unix",
+			"revision": "478fcf54317e52ab69f40bb4c7a1520288d7f7ea",
+			"revisionTime": "2016-12-05T15:46:50Z"
+		},
+		{
+			"checksumSHA1": "R/zHGOyQVEPeThF/hfvhwc7BZpk=",
+			"path": "google.golang.org/grpc",
+			"revision": "0032a855ba5c8a3c8e0d71c2deef354b70af1584",
+			"revisionTime": "2016-08-19T18:23:41Z"
+		},
+		{
+			"checksumSHA1": "08icuA15HRkdYCt6H+Cs90RPQsY=",
+			"path": "google.golang.org/grpc/codes",
+			"revision": "0032a855ba5c8a3c8e0d71c2deef354b70af1584",
+			"revisionTime": "2016-08-19T18:23:41Z"
+		},
+		{
+			"checksumSHA1": "4Wx8hSn+xOJAk2iBVFquOdijGOU=",
+			"path": "google.golang.org/grpc/credentials",
+			"revision": "0032a855ba5c8a3c8e0d71c2deef354b70af1584",
+			"revisionTime": "2016-08-19T18:23:41Z"
+		},
+		{
+			"checksumSHA1": "3Lt5hNAG8qJAYSsNghR5uA1zQns=",
+			"path": "google.golang.org/grpc/grpclog",
+			"revision": "0032a855ba5c8a3c8e0d71c2deef354b70af1584",
+			"revisionTime": "2016-08-19T18:23:41Z"
+		},
+		{
+			"checksumSHA1": "T3Q0p8kzvXFnRkMaK/G8mCv6mc0=",
+			"path": "google.golang.org/grpc/internal",
+			"revision": "0032a855ba5c8a3c8e0d71c2deef354b70af1584",
+			"revisionTime": "2016-08-19T18:23:41Z"
+		},
+		{
+			"checksumSHA1": "rxtneb9jDjKPHNZhC5obfG++6bI=",
+			"path": "google.golang.org/grpc/metadata",
+			"revision": "0032a855ba5c8a3c8e0d71c2deef354b70af1584",
+			"revisionTime": "2016-08-19T18:23:41Z"
+		},
+		{
+			"checksumSHA1": "4GSUFhOQ0kdFlBH4D5OTeKy78z0=",
+			"path": "google.golang.org/grpc/naming",
+			"revision": "0032a855ba5c8a3c8e0d71c2deef354b70af1584",
+			"revisionTime": "2016-08-19T18:23:41Z"
+		},
+		{
+			"checksumSHA1": "3RRoLeH6X2//7tVClOVzxW2bY+E=",
+			"path": "google.golang.org/grpc/peer",
+			"revision": "0032a855ba5c8a3c8e0d71c2deef354b70af1584",
+			"revisionTime": "2016-08-19T18:23:41Z"
+		},
+		{
+			"checksumSHA1": "dwol7IiUGWqDNNf0Oy2PECJwtdk=",
+			"path": "google.golang.org/grpc/transport",
+			"revision": "0032a855ba5c8a3c8e0d71c2deef354b70af1584",
+			"revisionTime": "2016-08-19T18:23:41Z"
+		}
+	],
+	"rootPath": "github.com/circonus-labs/snap-plugin-publisher-circonus"
+}

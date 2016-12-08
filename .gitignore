@@ -1,0 +1,7 @@
+*.out
+profile.cov
+vendor/*
+!vendor/vendor.json
+build/
+example/*.tar.gz
+example/tasks/individual/

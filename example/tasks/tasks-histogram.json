@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "schedule": {
+        "type": "simple",
+        "interval": "2s"
+    },
+    "workflow": {
+        "collect": {
+            "config": {
+                "/intel/procfs": {
+                    "proc_path": "/proc"
+                }
+            },
+            "metrics": {
+                "/intel/procfs/disk/sda/*": {},
+                "/intel/procfs/load/existing_scheduling": {},
+                "/intel/procfs/load/runnable_scheduling": {}
+            },
+            "tags": {
+                "/intel/procfs": {
+                    "circonus_type": "histogram"
+                }
+            },
+            "process": null,
+            "publish": [
+                {
+                    "plugin_name": "circonus",
+                    "config": {
+                        "api_token": "API_TOKEN"
+                    }
+                }
+            ]
+        }
+    }
+}
